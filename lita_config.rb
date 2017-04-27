@@ -17,7 +17,7 @@ Lita.configure do |config|
 
   # The adapter you want to connect with. Make sure you've added the
   # appropriate gem to the Gemfile.
-  config.robot.adapter = :shell
+  config.robot.adapter = :hipchat
 
   ## Example: Set options for the chosen adapter.
   # config.adapter.username = "myname"
@@ -30,4 +30,9 @@ Lita.configure do |config|
   ## Example: Set configuration for any loaded handlers. See the handler's
   ## documentation for options.
   # config.handlers.some_handler.some_config_key = "value"
+
+  config.adapters.hipchat.jid = "81759_4938764@chat.hipchat.com"
+  config.adapters.hipchat.password = "s3DqcBV#L%@6r"
+  config.adapters.hipchat.debug = true
+  config.adapters.hipchat.rooms = :all
 end
