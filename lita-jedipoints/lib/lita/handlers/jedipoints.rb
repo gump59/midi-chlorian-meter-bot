@@ -16,7 +16,7 @@ module Lita
         puts "#{key} = #{score}"
       end
 
-      route(/^echo\s+(.+)/, :echo, command: true, restrict_to: [:testers, :committers], help: {
+      route(/^echo\s+(.+)/, :echo, command: true, help: {
         "echo TEXT" => "Replies back with TEXT."
       })
 
