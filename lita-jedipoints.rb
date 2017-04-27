@@ -10,7 +10,11 @@ module Lita
       })
 
       route(/^points/, :points, command: true, help: {
-        "points" => "Does some points stuff, I hope"
+        "points" => "prints all points"
+      })
+
+      route(/^points\s+(.+)/, :points, command: true, help: {
+        "points" => "prints points for given month"
       })
 
       def echo(response)
