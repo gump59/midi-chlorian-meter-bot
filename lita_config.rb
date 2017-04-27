@@ -2,7 +2,7 @@ Lita.configure do |config|
   # The name your robot will use.
   config.robot.name = "MidiBot"
 
-  require './lita-jedipoints'
+  require './lita-jedipoints/lib/lita-jedipoints'
 
   # The locale code for the language to use.
   # config.robot.locale = :en
