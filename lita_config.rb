@@ -1,6 +1,6 @@
 Lita.configure do |config|
   # The name your robot will use.
-  config.robot.name = "Lita"
+  config.robot.name = "MidiBot"
 
   # The locale code for the language to use.
   # config.robot.locale = :en
@@ -34,5 +34,4 @@ Lita.configure do |config|
   config.adapters.hipchat.jid = "81759_4938764@chat.hipchat.com"
   config.adapters.hipchat.password = "s3DqcBV#L%@6r"
   config.adapters.hipchat.debug = true
-  config.adapters.hipchat.rooms = :all
 end
