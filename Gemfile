@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "lita"
 gem "lita-hipchat"
+gem "firebase"
 
 # Uncomment to use the HipChat adapter
 # gem "lita-hipchat"
