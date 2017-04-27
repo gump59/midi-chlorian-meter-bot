@@ -13,7 +13,7 @@ Lita.configure do |config|
   # An array of user IDs that are considered administrators. These users
   # the ability to add and remove other users from authorization groups.
   # What is considered a user ID will change depending on which adapter you use.
-  config.robot.admins = ["81759_590448@chat.hipchat.com"]
+  config.robot.admins = ["81759_590448@chat.hipchat.com", "81759_592396@chat.hipchat.com"]
 
   # The adapter you want to connect with. Make sure you've added the
   # appropriate gem to the Gemfile.
