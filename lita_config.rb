@@ -34,6 +34,6 @@ Lita.configure do |config|
   # config.handlers.some_handler.some_config_key = "value"
 
   config.adapters.hipchat.jid = "81759_4938764@chat.hipchat.com"
-  config.adapters.hipchat.password = "s3DqcBV#L%@6r"
+  config.adapters.hipchat.password = "3DqcBV#L%@6r"
   config.adapters.hipchat.debug = true
 end
