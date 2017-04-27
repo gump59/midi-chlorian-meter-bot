@@ -3,14 +3,22 @@ module Lita
     class Jedipoints < Handler
       # insert handler code here
 
-      puts "Hello World!"
       require 'firebase'
       base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
       firebase = Firebase::Client.new(base_uri)
       response = firebase.get("users")
       response.body.each do |key, array|
-        puts "#{key}"
+        points = firebase.get("events", "orderBy=\"user\"&equalTo=\"#{key}\"")
+        score = 0
+        points.body.each do |key, array|
+          score += array["value"]
+        end
+        puts "#{key} = #{score}"
       end
+
+      route(/^echo\s+(.+)/, :echo, command: true, restrict_to: [:testers, :committers], help: {
+        "echo TEXT" => "Replies back with TEXT."
+      })
 
       Lita.register_handler(self)
     end
