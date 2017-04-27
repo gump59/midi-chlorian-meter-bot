@@ -20,6 +20,10 @@ module Lita
         "echo TEXT" => "Replies back with TEXT."
       })
 
+      def echo(response)
+        response.reply(response.matches)
+      end
+      
       Lita.register_handler(self)
     end
   end
