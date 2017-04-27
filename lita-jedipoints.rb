@@ -25,7 +25,7 @@ module Lita
 
       route(/^points\s+(.+)/, :points, command: true, help: {
         "points" => "Does some points stuff, I hope"
-      }
+      })
 
       def echo(response)
         response.reply(response.matches)
