@@ -51,16 +51,19 @@ module Lita
       end
 
       def event(response)
+          date = nil
+          note = nil
         response.matches[0].each do |argu|
           if argu.match(/^on /)
             date = Date.parse(argu[3..-1]) rescue Date.parse(Date.today.strftime("%Y-%m-%d"))
           end
+          
           if argu.match(/^btw /)
             note = argu[4..-1]
           end
         end
         response.reply("#{response.matches[0][0]} did #{response.matches[0][1]} on #{date} btw #{note}")
-        addEvent(response.matches[0][0], response.matches[0][1], response.matches[0][2])
+        addEvent(response.matches[0][0], response.matches[0][1], note, date)
       end
 
       def addEvent(user, task_alias, note=nil, date=nil)
