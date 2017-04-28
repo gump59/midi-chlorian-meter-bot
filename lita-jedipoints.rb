@@ -112,13 +112,8 @@ module Lita
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
         firebaseResponse = firebase.get("tasks")
-response.reply("Listing #{response.matches[0][0]}")
 response.reply(firebaseResponse.body)
-        firebaseResponse.body.each do |key, array|
-          response.reply(key)
-          response.reply(array.to_s)
-        end
-      end
+     end
 
       Lita.register_handler(self)
     end
