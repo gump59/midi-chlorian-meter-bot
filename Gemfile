@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "lita"
 gem "lita-hipchat"
 gem "firebase"
+gem "lita-heroku-keepalive"
 
 # Uncomment to use the HipChat adapter
 # gem "lita-hipchat"
