@@ -39,7 +39,7 @@ module Lita
             points.body.each do |key, array|
               response.reply("date: #{array["date"]}")
               eventDate = Date.parse(array["date"]) rescue nil
-              response.reply("parsed date: #{eventDate}")
+              response.reply("parsed date: #{eventDate} vs input date: #{month}")
               if eventDate > month
                 score += array["value"]
               end
