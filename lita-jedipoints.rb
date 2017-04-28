@@ -33,9 +33,11 @@ module Lita
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
         firebaseResponse = firebase.get("users")
+        response.reply(firebaseResponse.body)
         firebaseResponse.body.each do |key, array|
             points = firebase.get("events", "orderBy=\"user\"&equalTo=\"#{key}\"")
             score = 0
+            response.reply(points)
             points.body.each do |key, array|
               response.reply("date: #{array["date"]}")
               eventDate = Date.parse(array["date"]) rescue nil
