@@ -2,12 +2,12 @@ module Lita
   module Handlers
     class Jedipoints < Handler
       # insert handler code here
-      on(:connected) do
-        robot.join 81759_points_tracking_testing@conf.hipchat.com
-      end
-
       require 'firebase'
       require 'date'
+
+      on(:connected) do
+        robot.join "81759_points_tracking_testing@conf.hipchat.com"
+      end
 
       route(/^echo\s+(.+)/, :echo, command: true, help: {
         "echo TEXT" => "Replies back with TEXT."
