@@ -14,7 +14,9 @@ module Lita
         "points" => "prints points for given month"
       })
 
-      route(/@(.+) did (.+)/, :event, command: true, help: {
+      route(/^@(.+) did (.+) on (.+)$/, :points, command: true)
+
+      route(/^@(.+) did (.+)$/, :event, command: true, help: {
         "@mention did task" => "Records that someone did a thing"
       })
 
@@ -48,7 +50,7 @@ module Lita
 
       def event(response)
 	       response.reply("#{response.matches[0][0]} did #{response.matches[0][1]}")
-         addEvent(response.matches[0][0], response.matches[0][1])
+         addEvent(response.matches[0][0], response.matches[0][1], response.matches[0][2])
       end
 
       def addEvent(user, task_alias, note=nil, date=nil)
