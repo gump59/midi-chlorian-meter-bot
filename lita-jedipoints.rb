@@ -57,6 +57,7 @@ module Lita
           end
           if argu.match(/^btw /)
             note = argu[4..-1]
+          end
         end
         response.reply("#{response.matches[0][0]} did #{response.matches[0][1]} on #{date} btw #{note}")
         addEvent(response.matches[0][0], response.matches[0][1], response.matches[0][2])
