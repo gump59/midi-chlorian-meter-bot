@@ -36,6 +36,7 @@ module Lita
       end
 
       def event(response)
+	response.reply("#{response.matches[0]} did #{response.matches[1]}")
         addEvent(response.matches[0], response.matches[1])
       end
         
@@ -52,7 +53,6 @@ module Lita
 	 date = Date.today.to_s
 	end
 	firebaseResponse = $firebase.push("events", { :user => user, :task => taskresponse.body.keys[0], :value => task["value"], :date => date, :note => note})
-	response.reply("#{user} did #{task} on #{date}")
       end
 
 
