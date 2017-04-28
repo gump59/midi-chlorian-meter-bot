@@ -113,7 +113,7 @@ module Lita
         firebase = Firebase::Client.new(base_uri)
         firebaseResponse = firebase.get(response.matches[0][0])
         firebaseResponse.body.each do |key, array|
-          response.reply(array)
+          response.reply(array.to_s)
         end
       end
 
