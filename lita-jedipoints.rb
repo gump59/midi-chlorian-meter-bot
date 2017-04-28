@@ -111,7 +111,8 @@ module Lita
       def list(response)
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
-        firebaseResponse = firebase.get("tasks")
+        nani = response.matches[0][0].strip
+        firebaseResponse = firebase.get(nani)
         puts(firebaseResponse.body)
         firebaseResponse.body.each do |key, array|
           task_alias = array["alias"]
