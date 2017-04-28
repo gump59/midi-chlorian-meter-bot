@@ -9,7 +9,7 @@ module Lita
         "echo TEXT" => "Replies back with TEXT."
       })
 
-      route(/^points\s*(.+)/, :points, command: true, help: {
+      route(/^points*\s*(.+)/, :points, command: true, help: {
         "points" => "prints points for given month"
       })
 
