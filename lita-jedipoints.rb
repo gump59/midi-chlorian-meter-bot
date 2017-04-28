@@ -37,6 +37,7 @@ module Lita
             points = firebase.get("events", "orderBy=\"user\"&equalTo=\"#{key}\"")
             score = 0
             points.body.each do |key, array|
+              respons reply("date: #{array}")
               eventDate = Date.parse(array["date"]) rescue nil
               if eventDate > month
                 score += array["value"]
