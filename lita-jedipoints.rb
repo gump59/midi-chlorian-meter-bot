@@ -60,6 +60,7 @@ module Lita
       def event(response)
         date = nil
         note = nil
+        value = nil
         reply = "#{response.matches[0][0]} did #{response.matches[0][1]}"
         response.matches[0].each do |argu|
           if argu.match(/^value /)
