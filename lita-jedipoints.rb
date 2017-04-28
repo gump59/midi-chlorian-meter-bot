@@ -38,7 +38,7 @@ module Lita
             score = 0
             points.body.each do |key, array|
               eventDate = Date.parse(array["date"]) rescue nil
-              if eventDate >= month && eventday < month.next_month
+              if eventDate >= month && eventDate < month.next_month
                 score += array["value"]
               end
             end
