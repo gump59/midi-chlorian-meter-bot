@@ -64,7 +64,7 @@ module Lita
         reply = "#{response.matches[0][0]} did #{response.matches[0][1]}"
         response.matches[0].each do |argu|
           if argu.match(/^value /)
-            value = argu[6..-1]
+            value = number_or_nil(argu[6..-1])
             reply = reply + " value #{value}"
           end
            if argu.match(/^on /)
@@ -79,6 +79,11 @@ module Lita
         end
         response.reply(reply)
         addEvent(response.matches[0][0], response.matches[0][1], note, date, value)
+      end
+
+      def number_or_nil(string)
+        num = string.to_i
+        num if num.to_s == string
       end
 
       def addEvent(user, task_alias, note=nil, date=nil, value=nil)
