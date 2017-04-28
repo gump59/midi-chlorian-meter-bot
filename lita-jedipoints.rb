@@ -57,12 +57,12 @@ module Lita
         response.matches[0].each do |argu|
           if argu.match(/^on /)
             date = Date.parse(argu[3..-1]) rescue Date.parse(Date.today.strftime("%Y-%m-%d"))
-            reply = reply + "on #{date}"
+            reply = reply + " on #{date}"
           end
           
           if argu.match(/^btw /)
             note = argu[4..-1]
-            reply = reply + "btw #{note}"
+            reply = reply + " btw #{note}"
           end
         end
         response.reply(reply)
