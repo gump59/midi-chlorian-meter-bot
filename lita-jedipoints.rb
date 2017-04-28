@@ -51,18 +51,21 @@ module Lita
       end
 
       def event(response)
-          date = nil
-          note = nil
+        date = nil
+        note = nil
+        reply = "#{response.matches[0][0]} did #{response.matches[0][1]}"
         response.matches[0].each do |argu|
           if argu.match(/^on /)
             date = Date.parse(argu[3..-1]) rescue Date.parse(Date.today.strftime("%Y-%m-%d"))
+            reply = reply + "on #{date}"
           end
           
           if argu.match(/^btw /)
             note = argu[4..-1]
+            reply = reply + "btw #{note}"
           end
         end
-        response.reply("#{response.matches[0][0]} did #{response.matches[0][1]} on #{date} btw #{note}")
+        response.reply(reply)
         addEvent(response.matches[0][0], response.matches[0][1], note, date)
       end
 
