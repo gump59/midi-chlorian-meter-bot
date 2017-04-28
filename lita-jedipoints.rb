@@ -127,6 +127,12 @@ module Lita
             rank = array["rank"]
             response.reply("#{name} (#{mention}) - #{rank}")
           end
+          if nani.match(/^events$/)
+            date = array["date"]
+            user = array["user"]
+            description = array["description"]
+            value = array["value"]
+            response.reply("On #{date} #{user} did #{description} for #{value} points")
         end
      end
 
