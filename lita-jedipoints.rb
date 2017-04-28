@@ -4,6 +4,7 @@ module Lita
       # insert handler code here
 
       require 'firebase'
+      require 'date'
 
       route(/^echo\s+(.+)/, :echo, command: true, help: {
         "echo TEXT" => "Replies back with TEXT."
@@ -22,10 +23,11 @@ module Lita
       end
 
       def points(response)
-      
-        month = response.matches
+
+        month = Date.parse(response.matches[0][0]) rescue nil
+
         response.reply("for month: #{month}")
-      
+
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
         firebaseResponse = firebase.get("users")
