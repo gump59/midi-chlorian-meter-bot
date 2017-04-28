@@ -24,9 +24,11 @@ module Lita
 
       def points(response)
 
-        month = Date.parse(response.matches[0][0]) rescue nil
+        month = Date.parse(response.matches[0][0]) rescue Date.today.strftime("%Y-%m-01")
 
-        response.reply("for month: #{month}")
+        if month != nil
+          response.reply("for month: #{month}")
+        end
 
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
@@ -35,7 +37,10 @@ module Lita
             points = firebase.get("events", "orderBy=\"user\"&equalTo=\"#{key}\"")
             score = 0
             points.body.each do |key, array|
-              score += array["value"]
+              eventDate = Date.parse(array["date"]) rescue nil
+              if eventDate > month
+                score += array["value"]
+              end
             end
             response.reply("#{key} = #{score}")
         end
