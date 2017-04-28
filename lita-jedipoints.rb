@@ -43,7 +43,7 @@ module Lita
       def addEvent(user, task_alias, note=nil, date=nil)
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
-        taskresponse = $firebase.get("tasks", "orderBy=\"alias\"&equalTo=\"#{task_alias}\"")
+        taskresponse = firebase.get("tasks", "orderBy=\"alias\"&equalTo=\"#{task_alias}\"")
         puts(taskresponse.body.keys[0])
         task = taskresponse.body.values[0]
 	  if note==nil
