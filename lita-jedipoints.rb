@@ -114,7 +114,6 @@ module Lita
         firebaseResponse = firebase.get("tasks")
         puts(firebaseResponse.body)
         firebaseResponse.body.each do |key, array|
-          puts(key)
           puts(array.to_s)
         end
      end
