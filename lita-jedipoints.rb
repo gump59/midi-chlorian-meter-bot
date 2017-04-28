@@ -29,6 +29,10 @@ module Lita
         "@mention did task" => "Records that someone did a thing"
       })
 
+      route(/^\s*list ([^ ]+)\s*$/, :list, command: true, help: {
+        "list tasks" => "lists all available tasks"
+      })
+
       def echo(response)
         response.reply(response.matches)
       end
@@ -102,6 +106,14 @@ module Lita
                  customValue = true
               end
 	      firebaseResponse = firebase.push("events", { :user => user.strip, :task => taskresponse.body.keys[0], :value => value, :date => date, :note => note, :description => task["description"], :customValue => customValue, :timestamp => {:'.sv' => "timestamp"}})
+      end
+
+      def list(response)
+        firebase = Firebase::Client.new(base_uri)
+        firebaseResponse = firebase.get(response.matches[0][0])
+        firebaseResponse.body.each do |key, array|
+          response.reply(array)
+        end
       end
 
       Lita.register_handler(self)
