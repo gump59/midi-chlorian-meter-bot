@@ -52,7 +52,7 @@ module Lita
 	  if date==nil
 	 date = Date.today.to_s
 	end
-	firebaseResponse = $firebase.push("events", { :user => user, :task => taskresponse.body.keys[0], :value => task["value"], :date => date, :note => note})
+	firebaseResponse = firebase.push("events", { :user => user, :task => taskresponse.body.keys[0], :value => task["value"], :date => date, :note => note})
       end
 
 
