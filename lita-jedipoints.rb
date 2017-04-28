@@ -133,6 +133,7 @@ module Lita
             description = array["description"]
             value = array["value"]
             response.reply("On #{date} #{user} did #{description} for #{value} points")
+          end
         end
      end
 
