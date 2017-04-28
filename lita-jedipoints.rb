@@ -96,9 +96,12 @@ module Lita
 	         date = Date.today.to_s
 	      end
               if value==nil
+                 customValue = false
                  value = task["value"]
+              else
+                 customValue = true
               end
-	      firebaseResponse = firebase.push("events", { :user => user.strip, :task => taskresponse.body.keys[0], :value => value, :date => date, :note => note, :description => task["description"], :timestamp => {:'.sv' => "timestamp"}})
+	      firebaseResponse = firebase.push("events", { :user => user.strip, :task => taskresponse.body.keys[0], :value => value, :date => date, :note => note, :description => task["description"], :customValue => customValue, :timestamp => {:'.sv' => "timestamp"}})
       end
 
       Lita.register_handler(self)
