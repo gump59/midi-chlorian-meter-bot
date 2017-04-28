@@ -114,7 +114,7 @@ module Lita
         firebaseResponse = firebase.get("tasks")
         puts(firebaseResponse.body)
         firebaseResponse.body.each do |entry|
-          puts(entry)
+          response.reply(entry)
         end
      end
 
