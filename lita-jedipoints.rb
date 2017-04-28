@@ -114,7 +114,7 @@ module Lita
         firebaseResponse = firebase.get("tasks")
         puts(firebaseResponse.body)
         firebaseResponse.body.each do |key, array|
-          response.reply(array.to_s)
+          response.reply("#{array["alias"]} = #{array["value"]} - #{array["description"]")
         end
      end
 
