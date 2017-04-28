@@ -28,7 +28,7 @@ module Lita
       def points(response)
       
         month = response.matches[0][0]
-        respons.reply("for month: #{month}")
+        response.reply("for month: #{month}")
       
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
