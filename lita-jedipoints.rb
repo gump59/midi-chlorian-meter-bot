@@ -36,8 +36,8 @@ module Lita
       end
 
       def event(response)
-	response.reply("#{response.matches[0]} did #{response.matches[1]}")
-        addEvent(response.matches[0], response.matches[1])
+	response.reply("#{response.matches[0][0]} did #{response.matches[0][1]}")
+        addEvent(response.matches[0][0], response.matches[0][1])
       end
         
       def addEvent(user, task_alias, note=nil, date=nil)
