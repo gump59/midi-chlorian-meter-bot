@@ -113,10 +113,8 @@ module Lita
         firebase = Firebase::Client.new(base_uri)
         firebaseResponse = firebase.get("tasks")
         puts(firebaseResponse.body)
-        firebaseResponse.body.each do |entry|
-          puts("---")
-          puts(entry)
-          puts("---")
+        firebaseResponse.body.each do |key, array|
+          puts(array)
         end
      end
 
