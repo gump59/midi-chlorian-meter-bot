@@ -10,7 +10,7 @@ module Lita
         "echo TEXT" => "Replies back with TEXT."
       })
 
-      route(/^points*\s*(.+)/, :points, command: true, help: {
+      route(/^points\s?(.*)/, :points, command: true, help: {
         "points" => "prints points for given month"
       })
 
@@ -49,8 +49,8 @@ module Lita
       end
 
       def event(response)
-	       response.reply("#{response.matches[0][0]} did #{response.matches[0][1]}")
-         addEvent(response.matches[0][0], response.matches[0][1], response.matches[0][2])
+        response.reply("#{response.matches[0][0]} did #{response.matches[0][1]}")
+        addEvent(response.matches[0][0], response.matches[0][1], response.matches[0][2])
       end
 
       def addEvent(user, task_alias, note=nil, date=nil)
