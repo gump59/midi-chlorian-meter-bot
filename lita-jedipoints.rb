@@ -117,7 +117,7 @@ module Lita
           task_alias = array["alias"]
           value = array["value"]
           description = array["description"]
-          response.reply("#{task_alias} = #{value} - #{description}")
+          response.reply("#{task_alias} (#{value}) - #{description}")
         end
      end
 
