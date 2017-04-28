@@ -14,7 +14,7 @@ module Lita
         "points" => "prints points for given month"
       })
 
-      route(/^@(.+) did ([^ ]+) on ([^ ]+)$/, :points, command: true)
+      route(/^@(.+) did ([^ ]+) on ([^ ]+)$/, :event, command: true)
 
       route(/^@(.+) did ([^ ]+)$/, :event, command: true, help: {
         "@mention did task" => "Records that someone did a thing"
