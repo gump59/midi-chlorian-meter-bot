@@ -26,6 +26,10 @@ module Lita
       end
 
       def points(response)
+      
+        month = response.matches[0][0]
+        respons.reply("for month: #{month}")
+      
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
         firebaseResponse = firebase.get("users")
@@ -40,26 +44,24 @@ module Lita
       end
 
       def event(response)
-	response.reply("#{response.matches[0][0]} did #{response.matches[0][1]}")
-        addEvent(response.matches[0][0], response.matches[0][1])
+	       response.reply("#{response.matches[0][0]} did #{response.matches[0][1]}")
+         addEvent(response.matches[0][0], response.matches[0][1])
       end
-        
+
       def addEvent(user, task_alias, note=nil, date=nil)
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
         taskresponse = firebase.get("tasks", "orderBy=\"alias\"&equalTo=\"#{task_alias}\"")
         puts(taskresponse.body.keys[0])
         task = taskresponse.body.values[0]
-	  if note==nil
-	 note = task["description"]
-	end
-	  if date==nil
-	 date = Date.today.to_s
-	end
-	firebaseResponse = firebase.push("events", { :user => user, :task => taskresponse.body.keys[0], :value => task["value"], :date => date, :note => note})
+	      if note==nil
+	          note = task["description"]
+	      end
+	      if date==nil
+	         date = Date.today.to_s
+	      end
+	      firebaseResponse = firebase.push("events", { :user => user, :task => taskresponse.body.keys[0], :value => task["value"], :date => date, :note => note})
       end
-
-
 
       Lita.register_handler(self)
     end
