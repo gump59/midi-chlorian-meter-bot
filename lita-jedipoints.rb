@@ -13,6 +13,10 @@ module Lita
         "points" => "Does some points stuff, I hope"
       })
 
+      route(/(@.+) did (.+)/, :event, command: true, help: {
+        "@mention did task" => "Records that someone did a thing"
+      })
+
       def echo(response)
         response.reply(response.matches)
       end
@@ -30,6 +34,28 @@ module Lita
             response.reply("#{key} = #{score}")
         end
       end
+
+      def event(response)
+        addEvent(response.matches[0], response.matches[1])
+      end
+        
+      def addEvent(user, task_alias, note=nil, date=nil)
+        base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
+        firebase = Firebase::Client.new(base_uri)
+        taskresponse = $firebase.get("tasks", "orderBy=\"alias\"&equalTo=\"#{task_alias}\"")
+        puts(taskresponse.body.keys[0])
+        task = taskresponse.body.values[0]
+	  if note==nil
+	 note = task["description"]
+	end
+	  if date==nil
+	 date = Date.today.to_s
+	end
+	firebaseResponse = $firebase.push("events", { :user => user, :task => taskresponse.body.keys[0], :value => task["value"], :date => date, :note => note})
+	response.reply("#{user} did #{task} on #{date}")
+      end
+
+
 
       Lita.register_handler(self)
     end
