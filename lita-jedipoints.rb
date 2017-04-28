@@ -13,7 +13,7 @@ module Lita
         "points" => "Does some points stuff, I hope"
       })
 
-      route(/(@.+) did (.+)/, :event, command: true, help: {
+      route(/@(.+) did (.+)/, :event, command: true, help: {
         "@mention did task" => "Records that someone did a thing"
       })
 
