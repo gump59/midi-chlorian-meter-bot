@@ -24,7 +24,7 @@ module Lita
 
       def points(response)
 
-        month = Date.parse(response.matches[0][0]) rescue Date.today.strftime("%Y-%m-01")
+        month = Date.parse(response.matches[0][0]) rescue Date.parse(Date.today.strftime("%Y-%m-01"))
 
         if month != nil
           response.reply("for month: #{month}")
