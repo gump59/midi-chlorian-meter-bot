@@ -115,10 +115,18 @@ module Lita
         firebaseResponse = firebase.get(nani)
         puts(firebaseResponse.body)
         firebaseResponse.body.each do |key, array|
-          task_alias = array["alias"]
-          value = array["value"]
-          description = array["description"]
-          response.reply("#{task_alias} (#{value}) - #{description}")
+          if(nani.match(/^tasks$/)
+            task_alias = array["alias"]
+            value = array["value"]
+            description = array["description"]
+            response.reply("#{task_alias} (#{value}) - #{description}")
+          end
+          if(nani.match(/^users$/)
+            mention = key
+            name = array["name"]
+            rank = array["rank"]
+            response.reply("#{name} (#{mention}) - #{rank}")
+          end
         end
      end
 
