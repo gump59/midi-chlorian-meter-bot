@@ -17,6 +17,10 @@ module Lita
         "points" => "prints points for given month"
       })
 
+      route(/^@(.+) did ([^ ]+) (value [^ ]+)$/, :event, command: true)
+      route(/^@(.+) did ([^ ]+) (value [^ ]+) (on [^ ]+)$/, :event, command: true)
+      route(/^@(.+) did ([^ ]+) (value [^ ]+) (btw .+)$/, :event, command: true)
+      route(/^@(.+) did ([^ ]+) (value [^ ]+) (on [^ ]+) (btw .+)$/, :event, command: true)
       route(/^@(.+) did ([^ ]+) (on [^ ]+)$/, :event, command: true)
       route(/^@(.+) did ([^ ]+) (on [^ ]+) (btw .+)$/, :event, command: true)
       route(/^@(.+) did ([^ ]+) (btw .+)$/, :event, command: true)
@@ -58,7 +62,11 @@ module Lita
         note = nil
         reply = "#{response.matches[0][0]} did #{response.matches[0][1]}"
         response.matches[0].each do |argu|
-          if argu.match(/^on /)
+          if argu.match(/^value /)
+            value = argu[6..-1]
+            reply = reply + " value #{value}"
+          end
+           if argu.match(/^on /)
             date = Date.parse(argu[3..-1]) rescue Date.parse(Date.today.strftime("%Y-%m-%d"))
             reply = reply + " on #{date}"
           end
@@ -69,10 +77,10 @@ module Lita
           end
         end
         response.reply(reply)
-        addEvent(response.matches[0][0], response.matches[0][1], note, date)
+        addEvent(response.matches[0][0], response.matches[0][1], note, date, value)
       end
 
-      def addEvent(user, task_alias, note=nil, date=nil)
+      def addEvent(user, task_alias, note=nil, date=nil, value)
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
         taskresponse = firebase.get("tasks", "orderBy=\"alias\"&equalTo=\"#{task_alias}\"")
@@ -81,7 +89,10 @@ module Lita
 	      if date==nil
 	         date = Date.today.to_s
 	      end
-	      firebaseResponse = firebase.push("events", { :user => user.strip, :task => taskresponse.body.keys[0], :value => task["value"], :date => date, :note => note, :description => task["description"], :timestamp => {:'.sv' => "timestamp"}})
+              if value==nil
+                 value = task["value"]
+              end
+	      firebaseResponse = firebase.push("events", { :user => user.strip, :task => taskresponse.body.keys[0], :value => value, :date => date, :note => note, :description => task["description"], :timestamp => {:'.sv' => "timestamp"}})
       end
 
       Lita.register_handler(self)
