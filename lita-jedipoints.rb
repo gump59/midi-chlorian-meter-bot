@@ -7,6 +7,7 @@ module Lita
 
       on(:connected) do
         robot.join "81759_points_tracking_testing@conf.hipchat.com"
+        robot.join "81759_jedi_points_tracking@conf.hipchat.com"
       end
 
       route(/^echo\s+(.+)/, :echo, command: true, help: {
