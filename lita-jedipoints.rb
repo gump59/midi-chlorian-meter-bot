@@ -58,7 +58,9 @@ module Lita
                 score += array["value"]
               end
             end
-            response.reply("#{key} = #{score}")
+            if score > 0
+              response.reply("#{key} = #{score}")
+            end
         end
       end
 
