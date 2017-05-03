@@ -43,6 +43,8 @@ module Lita
       end
 
       def feature(response)
+        base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
+        firebase = Firebase::Client.new(base_uri)
         response.reply(response.user.name + "(" + response.user.mention_name + ") requested feature " + response.matches[0][0])
 	firebaseResponse = firebase.push("requests", { :user => response.user.mention_name, :feature => response.matches[0][0], :timestamp => {:'.sv' => "timestamp"}})
       end
