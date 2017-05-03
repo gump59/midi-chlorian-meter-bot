@@ -156,6 +156,10 @@ module Lita
             value = array["value"]
             response.reply("On #{date} #{user} did #{description} for #{value} points")
           end
+          if nani.match(/^requests$/)
+            user = array["user"]
+            feature = array["feature"]
+            response.reply("#{user} requested #{feature}")
         end
      end
 
