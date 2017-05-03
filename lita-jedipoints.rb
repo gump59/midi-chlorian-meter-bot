@@ -73,7 +73,7 @@ module Lita
               scores[user] = score
             end
         end
-        scores.sort_by { |name, score| score } .each do |key, value|
+        scores.sort_by { |name, score| score }.reverse! .each do |key, value|
               response.reply("#{key} = #{value}")
         end
       end
