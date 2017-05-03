@@ -43,7 +43,7 @@ module Lita
       end
 
       def feature(response)
-        response.reply(response.user.name + "(" + response.user.id + ") requested feature " + response.matches[0][0])
+        response.reply(response.user.name + "(" + response.user.mention_name + ") requested feature " + response.matches[0][0])
       end
 
       def points(response)
