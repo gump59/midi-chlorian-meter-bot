@@ -34,7 +34,7 @@ module Lita
         "list tasks" => "lists all available tasks"
       })
 
-      route (^feature (.*)$/, :feature, command: true, help: {
+      route (/^feature (.*)$/, :feature, command: true, help: {
         "feature" => "create a feature request"
       })
 
