@@ -69,8 +69,8 @@ module Lita
               end
             end
             if score > 0
-              user = User.find_by_mention_name(key)
-              scores[:user.name] = score
+              user = User.find_by_mention_name(key).name
+              scores[user] = score
             end
         end
         people.sort_by { |name, age| age } .each do |key, value|
