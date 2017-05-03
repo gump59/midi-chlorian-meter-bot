@@ -69,7 +69,7 @@ module Lita
             end
             if score > 0
               user = User.find_by_mention_name(key)
-              response.reply("#{key.name} = #{score}")
+              response.reply("#{user.name} = #{score}")
             end
         end
       end
