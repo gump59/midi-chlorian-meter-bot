@@ -160,6 +160,7 @@ module Lita
             user = array["user"]
             feature = array["feature"]
             response.reply("#{user} requested #{feature}")
+          end
         end
      end
 
