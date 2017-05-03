@@ -34,8 +34,16 @@ module Lita
         "list tasks" => "lists all available tasks"
       })
 
+      route (^feature (.*)$/, :feature, command: true, help: {
+        "feature" => "create a feature request"
+      })
+
       def echo(response)
         response.reply(response.matches)
+      end
+
+      def feature(response)
+        response.reply(response.user.name + " requested feature " + response.matches[0][0])
       end
 
       def points(response)
