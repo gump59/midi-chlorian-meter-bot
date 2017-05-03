@@ -44,7 +44,7 @@ module Lita
 
       def feature(response)
         response.reply(response.user.name + "(" + response.user.mention_name + ") requested feature " + response.matches[0][0])
-        response.reply(User.find_by_mention_name(response.user.mention_name).name)
+	firebaseResponse = firebase.push("requests", { :user => response.user.mention_name, :feature => response.matches[0][0], :timestamp => {:'.sv' => "timestamp"}})
       end
 
       def points(response)
