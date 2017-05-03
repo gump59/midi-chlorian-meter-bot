@@ -58,6 +58,7 @@ module Lita
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
         firebaseResponse = firebase.get("users")
+        scores = { }
         firebaseResponse.body.each do |key, array|
             points = firebase.get("events", "orderBy=\"user\"&equalTo=\"#{key}\"")
             score = 0
@@ -69,8 +70,11 @@ module Lita
             end
             if score > 0
               user = User.find_by_mention_name(key)
-              response.reply("#{user.name} = #{score}")
+              scores[:user.name] = score
             end
+        end
+        people.sort_by { |name, age| age } .each do |key, value|
+              response.reply("#{key} = #{value}")
         end
       end
 
