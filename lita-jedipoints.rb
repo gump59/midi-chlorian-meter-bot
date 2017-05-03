@@ -18,15 +18,15 @@ module Lita
         "points" => "prints points for given month"
       })
 
-      route(/^@(.+) did ([^ ]+) (value [^ ]+)$/, :event, command: true)
-      route(/^@(.+) did ([^ ]+) (value [^ ]+) (on [^ ]+)$/, :event, command: true)
-      route(/^@(.+) did ([^ ]+) (value [^ ]+) (btw .+)$/, :event, command: true)
-      route(/^@(.+) did ([^ ]+) (value [^ ]+) (on [^ ]+) (btw .+)$/, :event, command: true)
-      route(/^@(.+) did ([^ ]+) (on [^ ]+)$/, :event, command: true)
-      route(/^@(.+) did ([^ ]+) (on [^ ]+) (btw .+)$/, :event, command: true)
-      route(/^@(.+) did ([^ ]+) (btw .+)$/, :event, command: true)
+      route(/^(.+) did ([^ ]+) (value [^ ]+)$/, :event, command: true)
+      route(/^(.+) did ([^ ]+) (value [^ ]+) (on [^ ]+)$/, :event, command: true)
+      route(/^(.+) did ([^ ]+) (value [^ ]+) (btw .+)$/, :event, command: true)
+      route(/^(.+) did ([^ ]+) (value [^ ]+) (on [^ ]+) (btw .+)$/, :event, command: true)
+      route(/^(.+) did ([^ ]+) (on [^ ]+)$/, :event, command: true)
+      route(/^(.+) did ([^ ]+) (on [^ ]+) (btw .+)$/, :event, command: true)
+      route(/^(.+) did ([^ ]+) (btw .+)$/, :event, command: true)
 
-      route(/^@(.+) did ([^ ]+)$/, :event, command: true, help: {
+      route(/^(.+) did ([^ ]+)$/, :event, command: true, help: {
         "@mention did task" => "Records that someone did a thing"
       })
 
@@ -93,7 +93,7 @@ module Lita
         num if num.to_s == string
       end
 
-      def addEvent(user, task_alias, note=nil, date=nil, value=nil)
+      def addEvent(users, task_alias, note=nil, date=nil, value=nil)
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
         taskresponse = firebase.get("tasks", "orderBy=\"alias\"&equalTo=\"#{task_alias}\"")
@@ -108,7 +108,10 @@ module Lita
               else
                  customValue = true
               end
-	      firebaseResponse = firebase.push("events", { :user => user.strip, :task => taskresponse.body.keys[0], :value => value, :date => date, :note => note, :description => task["description"], :customValue => customValue, :timestamp => {:'.sv' => "timestamp"}})
+              users.split(" ").each do |atuser|
+                user = atuser[1..-1]
+	        firebaseResponse = firebase.push("events", { :user => user.strip, :task => taskresponse.body.keys[0], :value => value, :date => date, :note => note, :description => task["description"], :customValue => customValue, :timestamp => {:'.sv' => "timestamp"}})
+              end
       end
 
       def list(response)
