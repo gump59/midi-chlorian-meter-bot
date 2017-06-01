@@ -24,6 +24,8 @@ module Lita
       route(/^(.+) did ([^ ]+) (value [^ ]+) (on [^ ]+) (btw .+)$/, :event, command: true)
       route(/^(.+) did ([^ ]+) (on [^ ]+)$/, :event, command: true)
       route(/^(.+) did ([^ ]+) (on [^ ]+) (btw .+)$/, :event, command: true)
+      route(/^(.+) did ([^ ]+) (on [^ ]+) (value [^ ]+)$/, :event, command: true)
+      route(/^(.+) did ([^ ]+) (on [^ ]+) (value [^ ]+) (btw .+)$/, :event, command: true)
       route(/^(.+) did ([^ ]+) (btw .+)$/, :event, command: true)
 
       route(/^(.+) did ([^ ]+)$/, :event, command: true, help: {
