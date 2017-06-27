@@ -33,7 +33,7 @@ module Lita
       })
 
       route(/^\s*list ([^ ]+)\s*$/, :list, command: true, help: {
-        "list tasks" => "lists all available tasks"
+        "list [users|tasks|events]" => "lists all available [users|tasks|events]"
       })
 
       route(/^\s*feature (.+)$/, :feature, command: true, help: {
