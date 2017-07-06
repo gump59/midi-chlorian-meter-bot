@@ -134,7 +134,7 @@ module Lita
                 end
                 jedi = userresponse.body.values[0]["jedi"]
                 if jedi != nil
-	          firebaseResponse = firebase.push("events", { :user => jedi, :padawan => user.strip, :task => taskresponse.body.keys[0], :value => value/2, :date => date, :note => note, :description => task["description"], :customValue => customValue, :timestamp => {:'.sv' => "timestamp"}})
+	          firebaseResponse = firebase.push("events", { :user => jedi, :padawan => user.strip, :task => taskresponse.body.keys[0], :value => value/2.0, :date => date, :note => note, :description => task["description"], :customValue => customValue, :timestamp => {:'.sv' => "timestamp"}})
                 end
 	        firebaseResponse = firebase.push("events", { :user => user.strip, :task => taskresponse.body.keys[0], :value => value, :date => date, :note => note, :description => task["description"], :customValue => customValue, :timestamp => {:'.sv' => "timestamp"}})
               end
