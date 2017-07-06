@@ -103,7 +103,7 @@ module Lita
           end
         end
         response.reply(reply)
-        addEvent(response.matches[0][0], response.matches[0][1], note, date, value)
+        addEvent(response, response.matches[0][0], response.matches[0][1], note, date, value)
       end
 
       def number_or_nil(string)
@@ -111,7 +111,7 @@ module Lita
         num if num.to_s == string
       end
 
-      def addEvent(users, task_alias, note=nil, date=nil, value=nil)
+      def addEvent(response, users, task_alias, note=nil, date=nil, value=nil)
         base_uri = 'https://midi-chlorian-meter.firebaseio.com/'
         firebase = Firebase::Client.new(base_uri)
         taskresponse = firebase.get("tasks", "orderBy=\"alias\"&equalTo=\"#{task_alias}\"")
@@ -128,7 +128,12 @@ module Lita
               end
               users.split(" ").each do |atuser|
                 user = atuser[1..-1]
-	        firebaseResponse = firebase.push("events", { :user => user.strip, :task => taskresponse.body.keys[0], :value => value, :date => date, :note => note, :description => task["description"], :customValue => customValue, :timestamp => {:'.sv' => "timestamp"}})
+                userresponse = firebase.get("users", "orderBy=\"$key\"&equalTo=\"#{user}\"")
+                if (userresponse.body.keys.count < 1) {
+                  response.reply("User #{user} not found")
+                }
+                jedi = userresponse.body.values[0].jedi
+	        firebaseResponse = firebase.push("events", { :user => user.strip, :jedi => jedi, :task => taskresponse.body.keys[0], :value => value, :date => date, :note => note, :description => task["description"], :customValue => customValue, :timestamp => {:'.sv' => "timestamp"}})
               end
       end
 
