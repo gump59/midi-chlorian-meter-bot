@@ -129,7 +129,7 @@ module Lita
               users.split(" ").each do |atuser|
                 user = atuser[1..-1]
                 userresponse = firebase.get("users", "orderBy=\"$key\"&equalTo=\"#{user}\"")
-                if userresponse.body.keys.count < 1) 
+                if userresponse.body.keys.count < 1
                   response.reply("User #{user} not found")
                 end
                 jedi = userresponse.body.values[0].jedi
