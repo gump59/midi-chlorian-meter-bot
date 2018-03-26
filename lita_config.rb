@@ -26,7 +26,7 @@ Lita.configure do |config|
   config.adapters.slack.unfurl_links = true
   config.adapters.slack.unfurl_media = true
 
-  config.adapters.slack.token = "xoxb-337201656695-oAV5m18iVvVtzhdLbDA9bXTk"
+  config.adapters.slack.token = ENV["SLACK_TOKEN"]
 
   ## Example: Set options for the chosen adapter.
   # config.adapter.username = "myname"
