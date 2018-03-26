@@ -15,11 +15,18 @@ Lita.configure do |config|
   # An array of user IDs that are considered administrators. These users
   # the ability to add and remove other users from authorization groups.
   # What is considered a user ID will change depending on which adapter you use.
-  config.robot.admins = ["81759_590448@chat.hipchat.com", "81759_592396@chat.hipchat.com"]
+  config.robot.admins = []
 
   # The adapter you want to connect with. Make sure you've added the
   # appropriate gem to the Gemfile.
-  config.robot.adapter = :hipchat
+  config.robot.adapter = :slack
+
+  config.adapters.slack.link_names = true
+  config.adapters.slack.parse = "full"
+  config.adapters.slack.unfurl_links = true
+  config.adapters.slack.unfurl_media = true
+
+  config.adapters.slack.token = "xoxb-337201656695-oAV5m18iVvVtzhdLbDA9bXTk"
 
   ## Example: Set options for the chosen adapter.
   # config.adapter.username = "myname"
@@ -35,7 +42,4 @@ Lita.configure do |config|
   ## documentation for options.
   # config.handlers.some_handler.some_config_key = "value"
 
-  config.adapters.hipchat.jid = "81759_4938764@chat.hipchat.com"
-  config.adapters.hipchat.password = "3DqcBV#L%@6r"
-  config.adapters.hipchat.debug = true
 end
