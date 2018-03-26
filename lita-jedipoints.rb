@@ -5,10 +5,6 @@ module Lita
       require 'firebase'
       require 'date'
 
-      on(:connected) do
-        robot.join "81759_jedi_points_tracking@conf.hipchat.com"
-      end
-
       route(/^echo\s+(.+)/, :echo, command: true, help: {
         "echo TEXT" => "Replies back with TEXT."
       })
